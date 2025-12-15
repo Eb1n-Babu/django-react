@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-function ProductsTable() {
+function App() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/items/") // Django REST API endpoint
+        fetch("http://127.0.0.1:8000/items/")
             .then((response) => response.json())
             .then((data) => {
                 setProducts(data);
@@ -21,18 +22,10 @@ function ProductsTable() {
 
     return (
         <div style={{ padding: "20px" }}>
-            <h2>Products</h2>
-            <table
-                border="1"
-                style={{
-                    width: "90%",
-                    margin: "auto",
-                    borderCollapse: "collapse",
-                    textAlign: "left",
-                }}
-            >
+            <h2>PRODUCTS LIST</h2>
+            <table border="1" style={{ width: "90%", margin: "auto", borderCollapse: "collapse", textAlign: "left" }}>
                 <thead>
-                <tr style={{ backgroundColor: "#f2f2f2" }}>
+                <tr style={{ backgroundColor: "gray", padding: "5px" }}>
                     <th>ID</th>
                     <th>Brand</th>
                     <th>Model</th>
@@ -40,9 +33,9 @@ function ProductsTable() {
                     <th>Price (₹)</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody style={{ color: "white" }}>
                 {products.map((product) => (
-                    <tr key={product.id}>
+                    <tr key={product}>
                         <td>{product.id}</td>
                         <td>{product.brand}</td>
                         <td>{product.model}</td>
@@ -56,4 +49,4 @@ function ProductsTable() {
     );
 }
 
-export default ProductsTable;
+export default App;
